@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Navbar, NavbarBrand } from 'reactstrap'
+import Menu from './components/MenuComponents'
 import './App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
           <NavbarBrand href='/'> Ristorante Con Fusion </NavbarBrand>
         </div>
       </Navbar>
+      <Menu />
     </div>
   );
 }
