@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardBody, CardImg, CardText, CardTitle } from 'reactstrap'
-
+import { Link } from 'react-router-dom';
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardImg, CardText, CardTitle } from 'reactstrap';
 
     function RenderDish({dish}){
             return(
@@ -17,13 +17,14 @@ import { Card, CardBody, CardImg, CardText, CardTitle } from 'reactstrap'
     }
 
     function RenderComments({comments}){
-        if(comments==null){
+        if(comments == null){
             return(<div></div>)
         }
+    
         const comm = comments.map(com => {
             return(
                 <div className="container">
-                    <ul key = {com.id} className = 'list-unstyled'>
+                    <ul key = {com.dishId} className = 'list-unstyled'>
                         <li><p>{com.comment}</p></li>
                         <li><p>-- {com.author},{ new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day : '2-digit'}).format(new Date(Date.parse(com.date)))}</p></li>
                     </ul> 
@@ -41,14 +42,25 @@ import { Card, CardBody, CardImg, CardText, CardTitle } from 'reactstrap'
 
     const DishDetail = (props)=>{
         const dish = props.dish;
+        const comment = props.comments;
         if(dish == null){
             return (<div></div>)
         }
         return(
             <div className="container">
+                <div className='row'>
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                </div>
+                <div className='col-12'>
+                    <h3>{props.dish.name}</h3>
+                    <hr />
+                </div>
                 <div className = "row">
                     <RenderDish dish = {dish} />
-                    <RenderComments comments = {dish.comments} />
+                    <RenderComments comments = {comment} />
                 </div>
             </div>
         );
