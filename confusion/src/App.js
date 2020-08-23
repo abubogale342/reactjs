@@ -3,18 +3,22 @@ import Main from './components/MainComponents'
 import {BrowserRouter as Router} from 'react-router-dom'
 import Header from './components/HeaderComponent';
 import Footer from './components/FooterComponent';
-// import Footer from './FooterComponent'
+import { Provider } from 'react-redux';
+import { configureStore } from './redux/confgureStore'
+const store = configureStore();
 
 class App extends Component {
   render() { 
     return ( 
-      <Router>
-        <div className="App">
-          <Header />
-          <Main />
-          <Footer />
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Header />
+            <Main />
+            <Footer />
+          </div>
+        </Router>
+      </Provider>
      );
   }
 }
