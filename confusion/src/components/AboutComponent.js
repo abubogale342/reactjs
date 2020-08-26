@@ -14,8 +14,7 @@ function RenderLeader({leader}){
                 <p className='d-none d-sm-block'>{leader.description}</p>
             </Media>
         </Media>
-    )
-    
+    );
 }
 
 function About(props) {
