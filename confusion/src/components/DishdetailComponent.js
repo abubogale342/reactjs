@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardImg, CardText, CardTitle, Button, FormGroup, Label, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { Control, Errors, LocalForm } from 'react-redux-form';
-
+import Loading from './LoadingComponent'
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -23,7 +23,7 @@ class CommentForm extends Component {
 
     handleLogin = (values) =>{  
         this.toggleModal(); 
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.addComment(this.props.dishId, values.rating, values.name, values.message);
     }
 
     render() { 
@@ -110,8 +110,8 @@ function RenderComments({comments, addComment, dishId}){
 
     const comm = comments.map(com => {
         return(
-            <div className="container">
-                <ul key = {com.dishId} className = 'list-unstyled'>
+            <div className="container" key = {com.dishId}>
+                <ul className = 'list-unstyled'>
                     <li><p>{com.comment}</p></li>
                     <li><p>-- {com.author},{ new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day : '2-digit'}).format(new Date(Date.parse(com.date)))}</p></li>
                 </ul> 
@@ -131,7 +131,25 @@ function RenderComments({comments, addComment, dishId}){
 const DishDetail = (props)=>{
     const dish = props.dish;
     const comment = props.comments;
-    if(dish == null){
+    if(props.dishesLoading){
+        return(
+            <div className='container'>
+                <div className='row'>
+                    <Loading />
+                </div>
+            </div>
+        )
+    }
+    else if(props.dishErrMsg){
+        return(
+            <div className='container'>
+                <div className='row'>
+                    <h4>{props.dishErrMsg}</h4>
+                </div>
+            </div>
+        )
+    }
+    else if(dish == null){
         return (<div></div>)
     }
     return(

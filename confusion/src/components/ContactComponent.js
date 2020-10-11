@@ -12,6 +12,7 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
 class Contact extends Component {
     constructor(props){
         super(props);
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleSubmit = (event) => {
@@ -153,7 +154,7 @@ class Contact extends Component {
                             </Row>
                             <Row className='form-group'>
                                 <Col md={{size:6, offset:2}}>
-                                    <Row check>
+                                    <Row>
                                         <Label check>
                                             <Control.checkbox model='.agree'
                                             name='agree'
