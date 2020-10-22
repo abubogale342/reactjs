@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Jumbotron, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Collapse, Modal, ModalHeader, ModalBody, Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
+import { Jumbotron, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Collapse, Modal, ModalHeader, ModalBody, Button, Form, FormGroup, Label, Input } from 'reactstrap'
 class Header extends Component {
     constructor(props){
         super(props);
@@ -29,8 +29,8 @@ class Header extends Component {
             + " Remember: " + this.remember.checked);
         event.preventDefault();
     }
-
-    render() { 
+    
+    render() {
         return ( 
             <React.Fragment>
                 <Navbar dark expand='md'>
